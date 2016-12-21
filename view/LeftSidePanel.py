@@ -1,5 +1,5 @@
-from tkinter import Frame, Label, Entry
-from tkinter.constants import E
+from tkinter import Frame, Label, Entry, Button
+from tkinter.constants import E, LEFT
 
 
 class LeftSidePanel(Frame):
@@ -8,8 +8,7 @@ class LeftSidePanel(Frame):
                   'Postleitzahl', 'Stadt', 'Telefon']
     
     def __init__(self, master, cnf={}, **kw):
-        Frame.__init__(self, master, cnf, **kw)
-        self.grid()
+        Frame.__init__(self, master,  borderwidth=1, **kw)
         self.configure(background='#141f1f')
         self.create_form()
 
@@ -18,17 +17,29 @@ class LeftSidePanel(Frame):
             
             empty = Label(self)
             empty.configure(background='#141f1f', fg="White")
-            empty.grid(columnspan=2)
+            empty.pack()
             
             label1 = Label(self, text=self.lbl_fields[value])
             label1.configure(background='#141f1f', fg="White")
             # sticky = E (EAST) -> place to right
-            label1.grid(row=value,  column=0, sticky=E)
+            label1.pack()
             
             entry1 = Entry(self)
-            entry1.grid(row=value,  column=1)
+            entry1.pack()
     
-    
+            
+        empty = Label(self)
+        empty.configure(background='#141f1f', fg="White")
+        empty.pack()
+        
+        btn_add = Button(self, text="Hinzufuegen")
+        btn_add.pack()
+        
+        for i in range(10):
+            empty = Label(self)
+            empty.configure(background='#141f1f', fg="White")
+            empty.pack()
+        
         
 
         

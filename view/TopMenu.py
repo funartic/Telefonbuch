@@ -20,6 +20,5 @@ class TopMenue(Menu):
         self.add_cascade(label="File", menu=subMenu)
         subMenu.add_command(label="Add Data", command=self.doNothing())
         
-        
     def doNothing(self):
-        print("OKAYYYY")
+        pass
