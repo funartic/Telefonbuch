@@ -1,8 +1,6 @@
-'''
-Created on 10.12.2016
+__author__ = "6252742: Daniel Holzinger, 6167921: Kristiyan Ivanov"
+__copyright__ = "Copyright 2016/2017 – EPR-Goethe-Uni"
 
-@author: Daniel
-'''
 from controller.Controller import Controller
 import logging
 import sys

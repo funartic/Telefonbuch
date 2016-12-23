@@ -1,4 +1,8 @@
-from tkinter import Frame
+__author__ = "6252742: Daniel Holzinger, 6167921: Kristiyan Ivanov"
+__copyright__ = "Copyright 2016/2017 – EPR-Goethe-Uni"
+
+
+from tkinter import Frame, Toplevel, Label, Entry, Button
 import tkinter.ttk as ttk
 import tkinter.font as tkFont
 
@@ -13,7 +17,7 @@ class BottomSidePanel(Frame):
 
     def create_form(self):
         self.tree = ttk.Treeview(columns=tbl_header, show="headings")
-        self.tree.bind("<Double-Button-1>", self.controller.on_tree_select)
+        self.tree.bind("<Double-Button-1>", self.controller.on_tree_edit)
         self.tree.bind("<Delete>", self.controller.on_tree_delete)
         vsb = ttk.Scrollbar(orient="vertical",
             command=self.tree.yview)
@@ -46,15 +50,52 @@ class BottomSidePanel(Frame):
                 if self.tree.column(tbl_header[ix],width=None)<col_w:
                     self.tree.column(tbl_header[ix], width=col_w)
         
+    def open_edit_view(self, old_person):
+        self.edit_toplevel = Toplevel()
+        self.edit_toplevel.title("Editieren:")
+        
+        self.edt_lbl_first_name = Label(self.edit_toplevel, text=tbl_header[0])
+        self.edt_lbl_first_name.grid(row=0, column=0)
+        self.edt_entry_first_name = Entry(self.edit_toplevel)
+        self.edt_entry_first_name.insert(0,old_person.firstname)
+        self.edt_entry_first_name.grid(row=0, column=3)
+        
+        self.edt_lbl_second_name = Label(self.edit_toplevel, text=tbl_header[1])
+        self.edt_lbl_second_name.grid(row=1, column=0)
+        self.edt_entry_second_name = Entry(self.edit_toplevel)
+        self.edt_entry_second_name.insert(0,old_person.secondname)
+        self.edt_entry_second_name.grid(row=1, column=3)
+        
+        self.edt_lbl_street_name = Label(self.edit_toplevel, text=tbl_header[2])
+        self.edt_lbl_street_name.grid(row=2, column=0)
+        self.edt_entry_street_name = Entry(self.edit_toplevel)
+        self.edt_entry_street_name.insert(0,old_person.firstname)
+        self.edt_entry_street_name.grid(row=2, column=3)
+        
+        self.edt_lbl_plz = Label(self.edit_toplevel, text=tbl_header[3])
+        self.edt_lbl_plz.grid(row=3, column=0)
+        self.edt_entry_plz = Entry(self.edit_toplevel)
+        self.edt_entry_plz.insert(0,old_person.plz)
+        self.edt_entry_plz.grid(row=3, column=3)
+        
+        self.edt_lbl_city = Label(self.edit_toplevel, text=tbl_header[4])
+        self.edt_lbl_city.grid(row=4, column=0)
+        self.edt_entry_city = Entry(self.edit_toplevel)
+        self.edt_entry_city.insert(0,old_person.city)
+        self.edt_entry_city.grid(row=4, column=3)
+        
+        self.edt_lbl_phone_number = Label(self.edit_toplevel, text=tbl_header[5])
+        self.edt_lbl_phone_number.grid(row=5, column=0)
+        self.edt_entry_phone_number = Entry(self.edit_toplevel)
+        self.edt_entry_phone_number.insert(0,old_person.firstname)
+        self.edt_entry_phone_number.grid(row=5, column=3)
+        
+        self.btn_edit_person = Button(self.edit_toplevel, text="Editieren")
+        self.btn_edit_person.grid(row=6, column=2)
+        self.btn_edit_person.bind("<Button-1>", 
+                                  self.controller.edit_person_btn_pressed)
+        
                     
-                    
-#     def on_tree_select(self, event):
-#             print("selected item:", end="", flush=True)
-#             for item in self.tree.selection():
-#                 item_text = self.tree.item(item, "text")
-#                 print(item_text)
-#                     
-# 
 def sortby(tree, col, descending):
     """sort tree contents when a column header is clicked on"""
     # grab values to sort

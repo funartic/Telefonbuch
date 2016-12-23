@@ -1,8 +1,6 @@
-'''
-Created on 22.12.2016
+__author__ = "6252742: Daniel Holzinger, 6167921: Kristiyan Ivanov"
+__copyright__ = "Copyright 2016/2017 – EPR-Goethe-Uni"
 
-@author: Daniel
-'''
 from model.Model import Model, Person
 import os, sys
 
@@ -20,8 +18,6 @@ def main():
     model.addPerson(person)
     model.deletePerson(person)
     model.editPerson(person, new_person)
-
-
 
 if __name__ == '__main__':
     main()

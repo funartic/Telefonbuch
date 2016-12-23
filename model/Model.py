@@ -1,8 +1,6 @@
-'''
-Created on 19.12.2016
+__author__ = "6252742: Daniel Holzinger, 6167921: Kristiyan Ivanov"
+__copyright__ = "Copyright 2016/2017 – EPR-Goethe-Uni"
 
-@author: Daniel
-'''
 import sys, os
 import logging
 from tkinter import Toplevel, Label
@@ -85,7 +83,7 @@ class Model(object):
     
     def editPerson(self, old_person, new_person):
         logging.info(str(old_person.to_string()) + " => " 
-                     + str(new_person.to_string))
+                     + str(new_person.to_string()))
         with open(self.path, 'r', encoding="utf8") as file:
             # read a list of lines into data
             data = file.readlines()
