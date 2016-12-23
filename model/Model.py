@@ -7,28 +7,31 @@ from tkinter import Toplevel, Label
 
 
 class Person(object):
-        def __init__(self, firstname, secondname, streetname,
-                     plz, city, phone_number):
-            self.firstname = firstname
-            self.secondname = secondname
-            self.streetname = streetname
-            self.plz = plz
-            self.city = city
-            self.phone_number = phone_number
-            
-        def to_string(self):
-            return str(self.firstname)      + ";" \
-                    + str(self.secondname)    + ";" \
-                    + str(self.streetname)    + ";" \
-                    + str(self.plz)           + ";" \
-                    + str(self.city)          + ";" \
-                    + str(self.phone_number)
+    """ Only a container class """
+    def __init__(self, firstname, secondname, streetname,
+                 plz, city, phone_number):
+        self.firstname = firstname
+        self.secondname = secondname
+        self.streetname = streetname
+        self.plz = plz
+        self.city = city
+        self.phone_number = phone_number
+        
+    def to_string(self):
+        return str(self.firstname)      + ";" \
+                + str(self.secondname)    + ";" \
+                + str(self.streetname)    + ";" \
+                + str(self.plz)           + ";" \
+                + str(self.city)          + ";" \
+                + str(self.phone_number)
         
 
 
 class Model(object):
     '''
-    classdocs
+    This class is the real backend. 
+    Its methods are activated by the controller (see MVC-pattern).
+    It mainly do some change on the file.
     '''
 
     def __init__(self):
@@ -36,6 +39,7 @@ class Model(object):
         
         
     def get_phone_list_as_array(self) -> []:
+        """ Reads the file and return a list"""
         dir_path = os.path.dirname(sys.modules['__main__'].__file__)
         array = []
         
@@ -49,10 +53,15 @@ class Model(object):
     
     
     def set_path_to_file_with_person_list(self, path):
+        """ 
+        Set the path to the file
+        which is read
+        """
         self.path = path
         
     
     def addPerson(self, person: Person):
+        """ Adds a new Person to the file"""
         if(person.firstname.replace(" ", "") != "" and
            person.secondname.replace(" ", "") != "" and
            person.phone_number.replace(" ", "") != ""):
@@ -71,6 +80,11 @@ class Model(object):
             
             
     def deletePerson(self, person: Person):
+        """ 
+        Delete an existing Person of the file
+        by searching for this person and write the file new
+        except the person the user deleted.
+        """
         logging.info(person.to_string() + " =>" + " Deleting...")
         
         with open(self.path,'r', encoding="utf8") as file:
@@ -82,6 +96,10 @@ class Model(object):
                     file.write(line)
     
     def editPerson(self, old_person, new_person):
+        """ 
+        Edit an existing Person of the file by searching the old one
+        and write the file again.
+        """
         logging.info(str(old_person.to_string()) + " => " 
                      + str(new_person.to_string()))
         with open(self.path, 'r', encoding="utf8") as file:

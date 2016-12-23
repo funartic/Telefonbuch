@@ -6,6 +6,9 @@ from tkinter import Frame, Label, Entry, Button, Checkbutton, StringVar,\
 
 
 class TopSidePanel(Frame):
+    """
+    This class creates some tkinter elements under the top menu.
+    """
     
     lbl_fields = ['Vorname', 'Nachname', 'Strasse',
               'Postleitzahl', 'Stadt', 'Telefon']
@@ -17,6 +20,9 @@ class TopSidePanel(Frame):
         self.create_form()
 
     def create_form(self):
+        """
+        Doing some view elements
+        """
         empty = Label(self)
         empty.configure(background='#141f1f', fg="White")
         empty.grid()
@@ -31,7 +37,8 @@ class TopSidePanel(Frame):
         lbl_search.configure(background='#141f1f')
         lbl_search.grid(row=1, column=10)
         
-#         for i in range(len(self.lbl_fields)):
+#       Again... a nice try to do it dynamically ...
+#       for i in range(len(self.lbl_fields)):
         self.checkBoxA = BooleanVar()
         self.checkbox_firstname = Checkbutton(self, 
                                text=self.lbl_fields[0], 

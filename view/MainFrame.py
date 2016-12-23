@@ -11,6 +11,15 @@ from view.BottomSidePanel import BottomSidePanel
 
 
 class MainFrame(Tk):
+    """ 
+    This class is the root window and 
+    collects every single panel.
+    Sadly we couldn't find another way to give the MainFrame(view) the
+    controller.  >:(
+    For advice how to do the mvc pattern in python we would be happy.
+    But it is not necessary needed :)
+    There are also some configuration made.
+    """
     
     def __init__(self, controller):
         Tk.__init__(self)  # call super constructor
@@ -37,9 +46,15 @@ class MainFrame(Tk):
         self.botSidePanel.pack(side=BOTTOM, anchor=W, fill=X, expand=YES)
 
     def setWindowSize(self, sLeft, sTop, sWidth, sHeight):
+        """
+         This method sets the size of the root window.
+        """
         self.wm_geometry(sWidth + "x" + sHeight + "+" + sLeft + "+" + sTop)
 
     def set_window_default_size(self):
+        """
+         This method sets the default size of the root window.
+        """
         sLeft = "%s" % 20  # X-Position auf dem Bildschirm (linke obere Ecke in Pixels)
         sTop = "%s" % 20  # Y-Position auf dem Bildschirm (linke obere Ecke in Pixels)
         sWidth = "%s" % 800  # Breite (Pixels)

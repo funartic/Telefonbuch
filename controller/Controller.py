@@ -8,7 +8,10 @@ from tkinter import filedialog
 
 class Controller(object):
     '''
-    classdocs
+    This class controlls the model and the view. 
+    If any event is needed to handle this class will do it.
+    It is the interface between model and view and update the 
+    model after every change.
     '''
     
     table_entries = []
@@ -23,6 +26,7 @@ class Controller(object):
         self.new_person = Person ("","","","","","")
         
     def showView(self):
+        """ This method start the view"""
         self.view.set_window_default_size()
         self.view.resizable(0, 0)
         self.view.mainloop()
@@ -31,6 +35,10 @@ class Controller(object):
 #      Event Handlings:
         
     def on_tree_edit(self, event):
+        """ 
+        If you double click on item in tree view, this method 
+        shows a new window and enter the selected values in the entrys
+        """
         curItem = self.view.botSidePanel.tree.focus()
         item_values = self.view.botSidePanel.tree.item(curItem)['values']
         old_person = Person(item_values[0], item_values[1], item_values[2],
@@ -39,6 +47,10 @@ class Controller(object):
 
             
     def edit_person_btn_pressed(self, event):
+        """ 
+        This method take the input of the user to edit the person.
+        It connects the view with the model.
+        """
         curItem = self.view.botSidePanel.tree.focus()
         item_values = self.view.botSidePanel.tree.item(curItem)['values']
         old_person = Person(item_values[0], item_values[1], item_values[2],
@@ -61,6 +73,10 @@ class Controller(object):
         
         
     def add_person_btn_pressed(self, event):
+        """ 
+        This method take the input of the user to add the person.
+        It connects the view with the model.
+        """
         person = Person(''.join(e for e in self.view.leftSidePanel
                                 .entry_firstname.get() if e.isalnum()),
                         ''.join(e for e in self.view.leftSidePanel
@@ -80,6 +96,12 @@ class Controller(object):
         self.clear_entrys()
     
     def search_for_keyword(self, sv):
+        """ 
+        This method take the input of the user by the checkboxes.
+        So you can specify the search. After finding the keyword it
+        refresh the view of the tree.
+        It connects the view with the model.
+        """
         search_list = []
         keyword = self.view.topSidePanel.sv.get()
         if(keyword == ""):
@@ -96,6 +118,7 @@ class Controller(object):
                     self.view.botSidePanel.set_table_content(search_list)
                     
     def clear_entrys(self):
+        """ This method only clear all entries from the left side panel"""
         self.view.leftSidePanel.entry_firstname.delete(0,END)
         self.view.leftSidePanel.entry_secondname.delete(0,END)
         self.view.leftSidePanel.entry_streetname.delete(0,END)
@@ -104,11 +127,18 @@ class Controller(object):
         self.view.leftSidePanel.entry_phone_number.delete(0,END)
         
     def openFile(self):
+        """ This method open a new file and set the content in the tree view"""
         self.model.set_path(filedialog.askopenfilename())
         self.table_entries = self.model.get_phone_list_as_array()
         self.view.botSidePanel.set_table_content(self.table_entries)
         
     def on_tree_delete(self, event):
+        """ 
+        This method is activated by selecting an item of the tree
+        and pressing the delte button. After doing that the item
+        will be deleted from the file and the view refreshs.
+        It connects the view with the model.
+        """
         curItem = self.view.botSidePanel.tree.focus()
         item_values = self.view.botSidePanel.tree.item(curItem)['values']
         person = Person(item_values[0], item_values[1], item_values[2],

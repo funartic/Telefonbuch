@@ -5,14 +5,16 @@ from tkinter import Menu, Label, Toplevel
 from tkinter.constants import LEFT, W
 
 class TopMenue():
-    '''
-    classdocs
-    '''
+    """
+    Boring class only implements some stupid view elements
+    You can see the result on the top side of the root 
+    window. It is a toolbar.
+    """
 
 
     def __init__(self, master, controller):
         '''
-        Constructor
+        Define some tkinter elements
         '''
         self.controller = controller
         
@@ -28,6 +30,10 @@ class TopMenue():
         master.config(menu=menubar)
         
     def show_help(self):
+        '''
+        This toplevel window is shown by pressing in the Help button
+        in the tool bar positioned at the top.
+        '''
         toplevel = Toplevel()
         toplevel.title("Die Hilfe:")
         label1 = Label(toplevel, text="Benutzbarkeit des Telefonbuchs:", height=0, width=100, anchor=W,  justify=LEFT)
@@ -68,6 +74,10 @@ auf die zu editierende Zeile aus.",
         label8.pack()
         
     def show_about(self):
+        '''
+        This toplevel window is shown by pressing in the About button
+        in the tool bar positioned at the top.
+        '''
         toplevel = Toplevel()
         toplevel.title("About:")
         label1 = Label(toplevel, text=

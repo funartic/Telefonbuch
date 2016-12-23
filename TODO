@@ -1,0 +1,10 @@
+- refactoring the MVC pattern
+- check for the correct file pattern using regex
+- it is more efficient to load the content in array
+	then work on it and when finish the safe it,
+	don't safe and read, write all time the file
+	when the user doing an action.
+	
+	
+-> those todos were not written in the task,
+	but are a nice to have

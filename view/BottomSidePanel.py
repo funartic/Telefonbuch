@@ -8,7 +8,9 @@ import tkinter.font as tkFont
 
 
 class BottomSidePanel(Frame):
-    
+    """
+    This panel got the main element: The tree view
+    """
     def __init__(self, master,controller, cnf={}, **kw):
         Frame.__init__(self, master,  borderwidth=1, **kw)
         self.configure(background='#141f1f')
@@ -40,17 +42,29 @@ class BottomSidePanel(Frame):
 
 
     def set_table_content(self, table_content_list):
+        """
+        This method set the table content and
+        adjust column's width if necessary to fit each value.
+        But first we needed to delete the children, to be sure
+        that we dont append children by refreshing the table.
+        BTW: It is possible to add alphabetical number to 
+        phone number in case for plus or minus symbols:
+        +0176 or 1231-4123-1412
+        """
         self.tree.delete(*self.tree.get_children())
         for item in table_content_list:
             index = table_content_list.index(item, )
             self.tree.insert('', 'end', values=item, text=index)
-#           adjust column's width if necessary to fit each value
             for ix, val in enumerate(item):
                 col_w = tkFont.Font().measure(val)
                 if self.tree.column(tbl_header[ix],width=None)<col_w:
                     self.tree.column(tbl_header[ix], width=col_w)
         
     def open_edit_view(self, old_person):
+        """
+        This method opens a new popup window and
+        set for all entries the specific values.
+        """
         self.edit_toplevel = Toplevel()
         self.edit_toplevel.title("Editieren:")
         
@@ -97,20 +111,22 @@ class BottomSidePanel(Frame):
         
                     
 def sortby(tree, col, descending):
-    """sort tree contents when a column header is clicked on"""
-    # grab values to sort
+    """ 
+    This FUNCTION sorts the tree contents as soon 
+    as a column header is clicked on
+    """
     data = [(tree.set(child, col), child) \
         for child in tree.get_children('')]
-    # if the data to be sorted is numeric change to float
-    #data =  change_numeric(data)
-    # now sort the data in place
     data.sort(reverse=descending)
     for ix, item in enumerate(data):
         tree.move(item[1], '', ix)
-    # switch the heading so it will sort in the opposite direction
+#     switch the heading so it will sort in the opposite direction
+#     credits to: http://stackoverflow.com/questions/1796469/
+#     how-to-sort-tree-view-on-click-on-column-header
     tree.heading(col, command=lambda col=col: sortby(tree, col, \
         int(not descending)))
     
-
+# for lazy ppl we tried to create the view elements dynamically
+# using a for loop. But we found no way to access events on them then.
 tbl_header = ['Vorname', 'Nachname', 'Strasse',
               'Postleitzahl', 'Stadt', 'Telefon']

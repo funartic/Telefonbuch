@@ -6,6 +6,9 @@ import os, sys
 
 
 def main():
+    """
+    Awesome tests!!!
+    """
     model = Model()
     
     person = Person("firstname", "secondname", "streetname",
@@ -15,9 +18,17 @@ def main():
     
     model.set_path(os.path.dirname(sys.modules['__main__'].__file__)+ "\\resources\\Phonelist.txt")
     
+#   file got a new person  
     model.addPerson(person)
+#   new person is deleted..
     model.deletePerson(person)
+#   file got a new person again..
+    model.addPerson(person)
+#   this time we edit the person
     model.editPerson(person, new_person)
+    
+#   this looks like it works. :)
+#   We have no clue how to test gui
 
 if __name__ == '__main__':
     main()

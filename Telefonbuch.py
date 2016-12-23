@@ -6,10 +6,18 @@ import logging
 import sys
 
 class Telefonbuch():
+    """
+    This class contains the main method.
+    So the start point is here!
+    """
     
     @staticmethod
     def main():
-        
+        """
+        The main method.
+        It configures the logger and after that 
+        it initialize a controller which starts the gui. 
+        """
         logger = logging.getLogger()
         logger.setLevel(logging.DEBUG)
         ch = logging.StreamHandler(sys.stdout)

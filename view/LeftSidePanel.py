@@ -5,6 +5,11 @@ from tkinter import Frame, Label, Entry, Button
 
 
 class LeftSidePanel(Frame):
+    """
+    Boring class only implements some stupid view elements
+    You can see the result on the left side of the root 
+    window.
+    """
     
     lbl_fields = ['Vorname', 'Nachname', 'Strasse',
                   'Postleitzahl', 'Stadt', 'Telefon']
@@ -15,7 +20,9 @@ class LeftSidePanel(Frame):
         self.create_form()
 
     def create_form(self):
-            
+        """
+        See class describtion...
+        """
 #       firstname  
         self.lbl_firstname = Label(self, text=self.lbl_fields[0])
         self.lbl_firstname.configure(background='#141f1f', fg="White")
@@ -72,6 +79,7 @@ class LeftSidePanel(Frame):
         self.btn_add = Button(self, text="Hinzufuegen")
         self.btn_add.pack()
         
+#       Push the elements to the top.   
         for i in range(10):
             empty = Label(self)
             empty.configure(background='#141f1f', fg="White")
