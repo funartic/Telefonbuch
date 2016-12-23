@@ -1,5 +1,4 @@
 from tkinter import Frame, Label, Entry, Button
-from tkinter.constants import E, LEFT
 
 
 class LeftSidePanel(Frame):
@@ -13,27 +12,62 @@ class LeftSidePanel(Frame):
         self.create_form()
 
     def create_form(self):
-        for value in range(len(self.lbl_fields)):
             
-            empty = Label(self)
-            empty.configure(background='#141f1f', fg="White")
-            empty.pack()
-            
-            label1 = Label(self, text=self.lbl_fields[value])
-            label1.configure(background='#141f1f', fg="White")
-            # sticky = E (EAST) -> place to right
-            label1.pack()
-            
-            entry1 = Entry(self)
-            entry1.pack()
-    
+#       firstname  
+        self.lbl_firstname = Label(self, text=self.lbl_fields[0])
+        self.lbl_firstname.configure(background='#141f1f', fg="White")
+        self.lbl_firstname.pack()
+        
+        self.entry_firstname = Entry(self, bg="#D0AA90")
+        self.entry_firstname.pack()
+        
+#       secondname  
+        self.lbl_secondname = Label(self, text=self.lbl_fields[1])
+        self.lbl_secondname.configure(background='#141f1f', fg="White")
+        self.lbl_secondname.pack()
+        
+        self.entry_secondname = Entry(self, bg="#D0AA90")
+        self.entry_secondname.pack()
+        
+#       streetname  
+        self.lbl_streetname = Label(self, text=self.lbl_fields[2])
+        self.lbl_streetname.configure(background='#141f1f', fg="White")
+        self.lbl_streetname.pack()
+        
+        self.entry_streetname = Entry(self)
+        self.entry_streetname.pack()
+        
+#       plz  
+        self.lbl_plz = Label(self, text=self.lbl_fields[3])
+        self.lbl_plz.configure(background='#141f1f', fg="White")
+        self.lbl_plz.pack()
+        
+        self.entry_plz = Entry(self)
+        self.entry_plz.pack()
+        
+#       city  
+        self.lbl_city = Label(self, text=self.lbl_fields[4])
+        self.lbl_city.configure(background='#141f1f', fg="White")
+        self.lbl_city.pack()
+        
+        self.entry_city = Entry(self)
+        self.entry_city.pack()
+        
+#       phone_number  
+        self.lbl_phone_number = Label(self, text=self.lbl_fields[5])
+        self.lbl_phone_number.configure(background='#141f1f', fg="White")
+        self.lbl_phone_number.pack()
+        
+        self.entry_phone_number = Entry(self, bg="#D0AA90")
+        self.entry_phone_number.pack()
+        
             
         empty = Label(self)
         empty.configure(background='#141f1f', fg="White")
         empty.pack()
         
-        btn_add = Button(self, text="Hinzufuegen")
-        btn_add.pack()
+        self.btn_add = Button(self, text="Hinzufuegen")
+        self.btn_add.pack()
         
         for i in range(10):
             empty = Label(self)

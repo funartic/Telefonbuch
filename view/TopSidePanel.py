@@ -1,4 +1,4 @@
-from tkinter import Frame, Label, Entry, Button, Checkbutton
+from tkinter import Frame, Label, Entry, Button, Checkbutton, StringVar
 from tkinter.constants import LEFT, W
 
 
@@ -7,16 +7,19 @@ class TopSidePanel(Frame):
     lbl_fields = ['Vorname', 'Nachname', 'Strasse',
               'Postleitzahl', 'Stadt', 'Telefon']
         
-    def __init__(self, master, cnf={}, **kw):
+    def __init__(self, master, controller, cnf={}, **kw):
         Frame.__init__(self, master,  borderwidth=1, **kw)
         self.configure(background='#141f1f')
+        self.controller = controller
         self.create_form()
 
     def create_form(self):
         empty = Label(self)
         empty.configure(background='#141f1f', fg="White")
         empty.grid()
-        input_search = Entry(self, width=59)
+        self.sv = StringVar()
+        self.sv.trace("w", lambda name, index, mode, sv= self.sv: self.controller.search_for_keyword(self.sv))
+        input_search = Entry(self, width=59, textvariable=self.sv)
         input_search.grid(row=1, column=1, columnspan=9)
         empty = Label(self)
         empty.configure(background='#141f1f', fg="White")

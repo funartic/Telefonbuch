@@ -4,8 +4,8 @@ Created on 19.12.2016
 @author: Daniel
 '''
 import sys, os
-import fileinput
 import logging
+from tkinter import Toplevel, Label
 
 
 class Person(object):
@@ -19,12 +19,12 @@ class Person(object):
             self.phone_number = phone_number
             
         def to_string(self):
-            return str(self.person.firstname)      + ";" \
-                    + str(self.person.secondname)    + ";" \
-                    + str(self.person.streetname)    + ";" \
-                    + str(self.person.plz)           + ";" \
-                    + str(self.person.city)          + ";" \
-                    + str(self.person.phone_number)
+            return str(self.firstname)      + ";" \
+                    + str(self.secondname)    + ";" \
+                    + str(self.streetname)    + ";" \
+                    + str(self.plz)           + ";" \
+                    + str(self.city)          + ";" \
+                    + str(self.phone_number)
         
 
 
@@ -55,35 +55,51 @@ class Model(object):
         
     
     def addPerson(self, person: Person):
-        logging.info(person.to_string() + " =>" + " Adding...")
-        with open(self.path, "a") as myfile:
-            myfile.write(person.to_string() + '\n')
+        if(person.firstname.replace(" ", "") != "" and
+           person.secondname.replace(" ", "") != "" and
+           person.phone_number.replace(" ", "") != ""):
+            logging.info(self.path)
+            logging.info(person.to_string() + " =>" + " Adding...")
+            with open(self.path, "a", encoding="utf8") as myfile:
+                myfile.write(person.to_string())
+                myfile.write('\n')
+        else:
+                toplevel = Toplevel()
+                toplevel.title("Zur Info:")
+                label1 = Label(toplevel, text="Bitte geben Sie den \
+                Vornamen, Nachnamen und \
+                die Telefonnummer an!", height=0, width=100)
+                label1.pack()
             
             
     def deletePerson(self, person: Person):
         logging.info(person.to_string() + " =>" + " Deleting...")
-        for line in fileinput.input(self.path, inplace=True):
-            if person.to_string() in line:
-                continue
-            print(line, end='')
+        
+        with open(self.path,'r', encoding="utf8") as file:
+            lines = file.readlines()
             
+        with open(self.path,'w', encoding="utf8") as file:
+            for line in lines:
+                if line !=person.to_string() + "\n":
+                    file.write(line)
+    
     def editPerson(self, old_person, new_person):
-        logging.info(old_person.to_string() + " => " + new_person.to_string)
-        with open(self.path, 'r') as file:
+        logging.info(str(old_person.to_string()) + " => " 
+                     + str(new_person.to_string))
+        with open(self.path, 'r', encoding="utf8") as file:
             # read a list of lines into data
             data = file.readlines()
         
         for i in range(len(data)-1):
-            if(data[i] == old_person.to_string()):
-                data[i] = new_person.to_string()
+            if(data[i] == old_person.to_string()+"\n"):
+                data[i] = new_person.to_string()+"\n"
                 
-        with open(self.path, 'w') as file:
+        with open(self.path, 'w', encoding="utf8") as file:
             file.writelines( data )
                 
+    def set_path(self, path):
+        self.path = path
             
-            
-        
-            
-            
+    
             
             

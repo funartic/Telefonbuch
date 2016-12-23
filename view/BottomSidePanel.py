@@ -5,14 +5,16 @@ import tkinter.font as tkFont
 
 class BottomSidePanel(Frame):
     
-    def __init__(self, master, cnf={}, **kw):
+    def __init__(self, master,controller, cnf={}, **kw):
         Frame.__init__(self, master,  borderwidth=1, **kw)
         self.configure(background='#141f1f')
+        self.controller = controller
         self.create_form()
 
     def create_form(self):
         self.tree = ttk.Treeview(columns=tbl_header, show="headings")
-        self.tree.bind("<Double-Button-1>", self.on_tree_select)
+        self.tree.bind("<Double-Button-1>", self.controller.on_tree_select)
+        self.tree.bind("<Delete>", self.controller.on_tree_delete)
         vsb = ttk.Scrollbar(orient="vertical",
             command=self.tree.yview)
         self.tree.grid(column=0, row=0, sticky='nsew', in_=self)
@@ -34,6 +36,7 @@ class BottomSidePanel(Frame):
 
 
     def set_table_content(self, table_content_list):
+        self.tree.delete(*self.tree.get_children())
         for item in table_content_list:
             index = table_content_list.index(item, )
             self.tree.insert('', 'end', values=item, text=index)
@@ -45,13 +48,13 @@ class BottomSidePanel(Frame):
         
                     
                     
-    def on_tree_select(self, event):
-            print("selected item:", end="", flush=True)
-            for item in self.tree.selection():
-                item_text = self.tree.item(item, "text")
-                print(item_text)
-                    
-
+#     def on_tree_select(self, event):
+#             print("selected item:", end="", flush=True)
+#             for item in self.tree.selection():
+#                 item_text = self.tree.item(item, "text")
+#                 print(item_text)
+#                     
+# 
 def sortby(tree, col, descending):
     """sort tree contents when a column header is clicked on"""
     # grab values to sort

@@ -5,13 +5,12 @@ Created on 10.12.2016
 '''
 from controller.Controller import Controller
 import logging
-import os, sys
+import sys
 
 class Telefonbuch():
     
     @staticmethod
     def main():
-        dir_path = os.path.dirname(sys.modules['__main__'].__file__)
         
         logger = logging.getLogger()
         logger.setLevel(logging.DEBUG)

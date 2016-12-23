@@ -5,7 +5,7 @@ Created on 10.12.2016
 '''
 from tkinter import Tk, Label
 from view.LeftSidePanel import LeftSidePanel
-from tkinter.constants import LEFT, SUNKEN, W, BOTTOM, X, Y, TOP, YES
+from tkinter.constants import LEFT, SUNKEN, W, BOTTOM, X, TOP, YES
 from view.TopMenu import TopMenue
 from view.TopSidePanel import TopSidePanel
 from view.BottomSidePanel import BottomSidePanel
@@ -14,14 +14,13 @@ from view.BottomSidePanel import BottomSidePanel
 
 class MainFrame(Tk):
     
-    def __init__(self):
+    def __init__(self, controller):
         Tk.__init__(self)  # call super constructor
         self.title('Das Telefonbuch')
         self.configure(background='#141f1f')
         
 #         ********* Toolbar *********
-        self.top_menu = TopMenue(self)
-        self.config(menu=self.top_menu)
+        self.top_menu = TopMenue(self, controller)
 
 #         ********* Status Bar *********
         self.status = Label(self, text="Preparing to do nothing", bd=1, relief=SUNKEN, anchor=W)
@@ -32,11 +31,11 @@ class MainFrame(Tk):
         self.leftSidePanel.pack(side=LEFT, fill=X)
         
 #         ********* Top Side *********
-        self.topSidePanel = TopSidePanel(self)
+        self.topSidePanel = TopSidePanel(self, controller)
         self.topSidePanel.pack(side=TOP, fill=X, expand=YES, padx=80,)
 
 #         ********* Right Side *********
-        self.botSidePanel = BottomSidePanel(self)
+        self.botSidePanel = BottomSidePanel(self, controller)
         self.botSidePanel.pack(side=BOTTOM, anchor=W, fill=X, expand=YES)
 
     def setWindowSize(self, sLeft, sTop, sWidth, sHeight):
